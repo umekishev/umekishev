@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IPMA Kyrgyzstan — Applying Member Association</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1f33;
+      --slate: #1a3a52;
+      --sky: #2e6b8a;
+      --gold: #c9a227;
+      --sun: #e8c44a;
+      --ink: #1c2834;
+      --muted: #5a6b78;
+      --mist: #f5f7f9;
+      --white: #ffffff;
+      --red: #b02a37;
+      --slide-pad: clamp(1.25rem, 4vw, 3.5rem);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background: var(--navy);
+    }
+
+    .deck {
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: start;
+      padding: var(--slide-pad);
+      padding-bottom: calc(var(--slide-pad) + 2.5rem);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(18px);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+      overflow: auto;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      z-index: 1;
+    }
+
+    .slide.light {
+      background:
+        radial-gradient(1200px 500px at 90% -10%, rgba(46, 107, 138, 0.14), transparent 55%),
+        linear-gradient(160deg, #eef3f7 0%, var(--mist) 45%, #e8eef3 100%);
+      color: var(--ink);
+    }
+
+    .slide.dark {
+      background:
+        radial-gradient(700px 400px at 92% 8%, rgba(201, 162, 39, 0.22), transparent 50%),
+        radial-gradient(900px 500px at 10% 90%, rgba(46, 107, 138, 0.35), transparent 55%),
+        linear-gradient(165deg, var(--navy) 0%, var(--slate) 100%);
+      color: var(--white);
+    }
+
+    .slide.dark .muted { color: #c5d4de; }
+    .slide.light .muted { color: var(--muted); }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.65rem;
+    }
+
+    .slide.dark .eyebrow { color: var(--gold); }
+
+    h1, h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); max-width: 16ch; }
+    h2 { font-size: clamp(1.7rem, 3.4vw, 2.55rem); max-width: 28ch; margin-bottom: 0.45rem; }
+
+    .lede {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.5;
+      max-width: 52ch;
+      margin-top: 0.75rem;
+    }
+
+    .mission-text {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.35rem, 2.6vw, 2rem);
+      line-height: 1.35;
+      max-width: 28ch;
+      margin-top: 1.2rem;
+    }
+
+    .brand-mark {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, var(--sun), var(--gold) 60%, #a8861c);
+      box-shadow: 0 0 0 8px rgba(201, 162, 39, 0.18);
+      animation: pulse-sun 4.5s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes pulse-sun {
+      0%, 100% { box-shadow: 0 0 0 8px rgba(201, 162, 39, 0.18); transform: scale(1); }
+      50% { box-shadow: 0 0 0 14px rgba(201, 162, 39, 0.1); transform: scale(1.03); }
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .grid-goals {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(26, 58, 82, 0.08);
+      border-radius: 4px;
+      padding: 1.15rem 1.25rem;
+      animation: rise 0.55s ease both;
+    }
+
+    .slide.is-active .panel:nth-child(1) { animation-delay: 0.05s; }
+    .slide.is-active .panel:nth-child(2) { animation-delay: 0.12s; }
+    .slide.is-active .panel:nth-child(3) { animation-delay: 0.19s; }
+    .slide.is-active .panel:nth-child(4) { animation-delay: 0.26s; }
+    .slide.is-active .panel:nth-child(5) { animation-delay: 0.33s; }
+    .slide.is-active .panel:nth-child(6) { animation-delay: 0.4s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.55rem;
+      color: var(--navy);
+    }
+
+    .panel .role {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.35rem;
+    }
+
+    .panel ul, .bullets {
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .panel li, .bullets li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .panel li::before, .bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .goal {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .num {
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 4px;
+      background: var(--navy);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .fact-row {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.55rem;
+    }
+
+    .fact-row strong {
+      color: var(--sky);
+      font-size: 0.88rem;
+    }
+
+    .phase-head {
+      padding: 0.85rem 1rem;
+      color: white;
+      margin: -1.15rem -1.25rem 1rem;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .phase-head.y2025 { background: var(--gold); color: var(--navy); }
+    .phase-head.y2026 { background: var(--sky); }
+    .phase-head.y2027 { background: var(--red); }
+
+    .phase-head .year {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.4rem;
+      display: block;
+    }
+
+    .contrib {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1.4rem;
+    }
+
+    .contrib article {
+      border-left: 3px solid var(--gold);
+      background: rgba(255, 255, 255, 0.82);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .contrib article:nth-child(even) { border-left-color: var(--sky); }
+
+    .contrib h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .contrib p { color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+
+    .contacts {
+      margin-top: 1.75rem;
+      padding: 1.25rem 1.4rem;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 4px;
+      max-width: 36rem;
+    }
+
+    .contacts .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.65rem;
+    }
+
+    .contacts p { margin-top: 0.35rem; }
+
+    .footer-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem var(--slide-pad);
+      background: linear-gradient(180deg, transparent, rgba(11, 31, 51, 0.55));
+      color: #d7e2ea;
+      font-size: 0.78rem;
+      pointer-events: none;
+    }
+
+    .footer-bar .controls {
+      display: flex;
+      gap: 0.4rem;
+      pointer-events: auto;
+    }
+
+    .footer-bar button {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(11, 31, 51, 0.65);
+      color: white;
+      border-radius: 4px;
+      padding: 0.35rem 0.7rem;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .footer-bar button:hover { border-color: var(--gold); color: var(--sun); }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--gold);
+      z-index: 30;
+      transition: width 0.35s ease;
+    }
+
+    .hint {
+      opacity: 0.75;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid-2, .grid-3, .grid-goals { grid-template-columns: 1fr; }
+      .fact-row { grid-template-columns: 1fr; gap: 0.2rem; }
+      h1 { max-width: none; }
+      .mission-text { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <main class="deck" id="deck" aria-live="polite">
+
+    <!-- 1 -->
+    <section class="slide dark is-active" data-title="Title">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <p class="eyebrow">Council of Delegates</p>
+      <h1>IPMA Kyrgyzstan</h1>
+      <p class="lede muted" style="font-size:1.35rem; margin-top:1rem;">Applying Member Association</p>
+      <p class="lede muted">Presentation to the IPMA Council of Delegates</p>
+      <p class="lede muted" style="margin-top:2rem;">Bringing the IPMA standard to Central Asia · Bishkek, Kyrgyz Republic</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide light" data-title="Leadership">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Introduction of ourselves</h2>
+      <p class="lede muted">Leadership of the applying Member Association</p>
+      <div class="grid-2">
+        <article class="panel">
+          <p class="role">President</p>
+          <h3>[Name Surname]</h3>
+          <ul>
+            <li>Project management practitioner / academic with experience in Kyrgyzstan</li>
+            <li>Leadership in establishing a national PM professional community</li>
+            <li>Strong links with universities, public sector and industry partners</li>
+            <li>Committed to aligning national practice with IPMA values and standards</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <p class="role">Vice-President</p>
+          <h3>[Name Surname]</h3>
+          <ul>
+            <li>Experience in education, certification pathways and community building</li>
+            <li>Focus on Young Crew development and university engagement</li>
+            <li>Author / contributor in project and programme management topics</li>
+            <li>Ready to co-lead IPMA Kyrgyzstan operations and partnerships</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide light" data-title="Team">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>A team ready to build IPMA Kyrgyzstan</h2>
+      <p class="lede muted">Governance roles prepared for launch</p>
+      <div class="grid-3">
+        <article class="panel"><h3>President</h3><p class="muted">Overall leadership &amp; CoD representation</p></article>
+        <article class="panel"><h3>Vice-President</h3><p class="muted">Membership, partners &amp; operations</p></article>
+        <article class="panel"><h3>Certification Lead</h3><p class="muted">CB setup, assessors &amp; quality</p></article>
+        <article class="panel"><h3>Young Crew Lead</h3><p class="muted">Universities &amp; early-career talent</p></article>
+        <article class="panel"><h3>Communications</h3><p class="muted">Ecosystem, events &amp; digital presence</p></article>
+        <article class="panel"><h3>Treasurer</h3><p class="muted">Not-for-profit financial stewardship</p></article>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide light" data-title="Country">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Strategic position of Kyrgyzstan</h2>
+      <p class="lede muted">A Central Asian gateway for professional project management</p>
+      <div style="margin-top:1rem;">
+        <div class="fact-row"><strong>Area</strong><span>199,900 km² — mountainous heart of Central Asia</span></div>
+        <div class="fact-row"><strong>Population</strong><span>~7.2 million (2024)</span></div>
+        <div class="fact-row"><strong>Capital / HQ</strong><span>Bishkek — proposed head office of the MA</span></div>
+        <div class="fact-row"><strong>Key sectors</strong><span>Energy &amp; hydropower, mining, infrastructure, agriculture, IT &amp; digital services, public investment programmes</span></div>
+        <div class="fact-row"><strong>Regional role</strong><span>Bridge between Central Asia, corridor projects and Eurasian markets</span></div>
+        <div class="fact-row"><strong>Opportunity</strong><span>Growing demand for competent P3M capability in national and donor-funded projects</span></div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide dark" data-title="Mission">
+      <p class="eyebrow">Our Mission</p>
+      <p class="mission-text">Promote and strengthen professionalism in project, programme and portfolio management across Kyrgyzstan — so that public and private projects achieve their objectives efficiently, ethically and in line with IPMA values and standards.</p>
+      <p class="lede muted" style="margin-top:1.75rem;">A national home for the IPMA ecosystem in Central Asia.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide light" data-title="Goals">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Strategic goals</h2>
+      <p class="lede muted">Clear priorities for the first three years</p>
+      <div class="grid-goals">
+        <div class="goal"><span class="num">1</span><p>Establish IPMA Kyrgyzstan as a recognised professional body in the Kyrgyz Republic.</p></div>
+        <div class="goal"><span class="num">2</span><p>Grow a stable community of individual and corporate members from a clear baseline.</p></div>
+        <div class="goal"><span class="num">3</span><p>Establish the Kyrgyzstan Certification Body across all 4 IPMA levels.</p></div>
+        <div class="goal"><span class="num">4</span><p>Achieve sustained certification growth and quality of assessment.</p></div>
+        <div class="goal"><span class="num">5</span><p>Promote the IPMA standard across Kyrgyzstan and the wider Central Asian region.</p></div>
+        <div class="goal"><span class="num">6</span><p>Launch and develop Young Crew Kyrgyzstan with universities.</p></div>
+        <div class="goal"><span class="num">7</span><p>Participate in and organise IPMA events, webinars and knowledge exchanges.</p></div>
+        <div class="goal"><span class="num">8</span><p>Build durable partnerships with training providers, employers and peer MAs.</p></div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide light" data-title="Roadmap">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Roadmap 2025–2027</h2>
+      <p class="lede muted">Stabilise · Grow · Scale</p>
+      <div class="grid-3">
+        <article class="panel">
+          <div class="phase-head y2025"><span class="year">2025</span>Establish &amp; launch</div>
+          <ul>
+            <li>Register non-profit association</li>
+            <li>Become IPMA Applying Member Association</li>
+            <li>Form Board and operating model</li>
+            <li>Target: ~25 founding members</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="phase-head y2026"><span class="year">2026</span>Promote &amp; certify</div>
+          <ul>
+            <li>Grow membership and visibility</li>
+            <li>Launch Certification Body pathway</li>
+            <li>University &amp; corporate outreach</li>
+            <li>Target: ~60 members</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="phase-head y2027"><span class="year">2027</span>Scale &amp; show results</div>
+          <ul>
+            <li>Present results to IPMA family</li>
+            <li>Expand certification volumes</li>
+            <li>Regional Central Asia collaboration</li>
+            <li>Target: 100+ members</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide light" data-title="Membership">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>We will grow membership</h2>
+      <p class="lede muted">Building the first national IPMA community in Kyrgyzstan. Today there is no established IPMA Member Association serving the country.</p>
+      <div class="grid-2">
+        <article class="panel"><h3>Individual members</h3><p class="muted">Practitioners seeking competence, network and recognition</p></article>
+        <article class="panel"><h3>Corporate members</h3><p class="muted">Employers investing in project capability and standards</p></article>
+        <article class="panel"><h3>Education providers</h3><p class="muted">Universities embedding IPMA into programmes</p></article>
+        <article class="panel"><h3>Training providers</h3><p class="muted">ATOs and partners supporting certification pathways</p></article>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide light" data-title="Certification">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Co-creating our Certification Body</h2>
+      <p class="lede muted">Quality certification rooted in collaboration with peer MAs / CBs</p>
+      <ul class="bullets" style="margin-top:1.5rem; max-width:58rem;">
+        <li>Offer all 4 IPMA certification levels, with a phased start where needed</li>
+        <li>Collaborate with established MAs / CBs to harmonise process and quality</li>
+        <li>Build a committed pool of assessors and share capacity regionally where appropriate</li>
+        <li>Outsource examination processing where it strengthens reliability and speed</li>
+        <li>Protect candidate experience and the reputation of the IPMA brand</li>
+        <li>Reinvest certification income into community development and Young Crew</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide light" data-title="Ecosystem">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Promotion of the IPMA ecosystem</h2>
+      <p class="lede muted">Visibility, knowledge and community channels</p>
+      <div class="grid-3">
+        <article class="panel"><h3>Website</h3><p class="muted">Official site promoting IPMA values, events and pathways</p></article>
+        <article class="panel"><h3>Social media</h3><p class="muted">LinkedIn, Instagram and professional channels in KR</p></article>
+        <article class="panel"><h3>Universities</h3><p class="muted">Guest lectures and curriculum links in Bishkek and beyond</p></article>
+        <article class="panel"><h3>Events</h3><p class="muted">Webinars, conferences and knowledge forums</p></article>
+        <article class="panel"><h3>Publications</h3><p class="muted">Professional articles and case studies from local practice</p></article>
+        <article class="panel"><h3>Regional links</h3><p class="muted">Exchange with Central Asian and neighbouring MAs</p></article>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide light" data-title="Young Crew">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Development of Young Crew Kyrgyzstan</h2>
+      <p class="lede muted">Starting PM careers with IPMA standards</p>
+      <ul class="bullets" style="margin-top:1.5rem; max-width:58rem;">
+        <li>Introduce ambitious youth to IPMA standards, values and global community</li>
+        <li>Connect students and early-career professionals to Young Crew Kyrgyzstan</li>
+        <li>Partner with universities in Bishkek and regional centres to enrich PM education</li>
+        <li>Support pathways from academic programmes toward IPMA Level D certification</li>
+        <li>Link Young Crew talent with employers facing project capability shortages</li>
+        <li>Encourage regional Young Crew collaboration across Central Asia</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide light" data-title="Contribution">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Our distinctive contribution</h2>
+      <p class="lede muted">Why IPMA Kyrgyzstan matters for the IPMA family</p>
+      <div class="contrib">
+        <article>
+          <h3>Central Asia presence</h3>
+          <p>Extend the IPMA footprint into a strategically important region with growing infrastructure and energy investment.</p>
+        </article>
+        <article>
+          <h3>Bilingual reach</h3>
+          <p>Serve Russian- and Kyrgyz-speaking professionals and open accessible pathways into the IPMA ecosystem.</p>
+        </article>
+        <article>
+          <h3>Public &amp; donor projects</h3>
+          <p>Raise competence where national programmes and international projects need reliable P3M practice.</p>
+        </article>
+        <article>
+          <h3>Peer collaboration</h3>
+          <p>Learn from mature MAs and CBs, and share back local insights from emerging-market project environments.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide dark" data-title="Support">
+      <p class="eyebrow">We welcome your support</p>
+      <p class="mission-text">The IPMA Kyrgyzstan team is ready to establish a distinct Member Association, grow a national P3M community, and collaborate with IPMA globally and through peer associations.</p>
+      <p class="lede muted" style="margin-top:1.75rem; max-width:46ch;">We respectfully ask for your support as an Applying Member Association — and look forward to contributing a new Central Asian voice to the IPMA family.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide light" data-title="Thank you">
+      <p class="eyebrow">IPMA Kyrgyzstan</p>
+      <h2>Thank you for your attention</h2>
+      <p class="lede muted">Looking forward to future cooperation within the IPMA family</p>
+      <div class="contacts">
+        <p class="label">Contacts</p>
+        <p>President: [name]@[organisation].kg</p>
+        <p>Vice-President: [name]@[organisation].kg</p>
+      </div>
+      <p class="lede" style="margin-top:1.5rem; font-weight:600;">Any questions?</p>
+    </section>
+  </main>
+
+  <div class="footer-bar">
+    <span>IPMA Kyrgyzstan · Applying Member Association</span>
+    <span class="hint">← → or click buttons · F for fullscreen</span>
+    <div class="controls">
+      <button type="button" id="prev" aria-label="Previous slide">←</button>
+      <span id="counter">1 / 14</span>
+      <button type="button" id="next" aria-label="Next slide">→</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const progress = document.getElementById("progress");
+    const counter = document.getElementById("counter");
+    let index = 0;
+
+    function show(i) {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((slide, n) => slide.classList.toggle("is-active", n === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `IPMA Kyrgyzstan — ${slides[index].dataset.title}`;
+    }
+
+    document.getElementById("prev").addEventListener("click", () => show(index - 1));
+    document.getElementById("next").addEventListener("click", () => show(index + 1));
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) {
+        e.preventDefault();
+        show(index + 1);
+      } else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) {
+        e.preventDefault();
+        show(index - 1);
+      } else if (e.key === "Home") {
+        show(0);
+      } else if (e.key === "End") {
+        show(slides.length - 1);
+      } else if (e.key.toLowerCase() === "f") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+    });
+
+    let touchX = null;
+    document.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      if (touchX == null) return;
+      const dx = e.changedTouches[0].screenX - touchX;
+      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+      touchX = null;
+    }, { passive: true });
+
+    show(0);
+  </script>
+</body>
+</html>
