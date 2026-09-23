@@ -33,8 +33,8 @@ h1,h2,h3,.display,.eyebrow,.num,.brand-mark{font-family:"Unbounded",sans-serif}
   box-shadow:0 40px 100px -40px rgba(26,21,32,.35), inset 0 0 0 1px rgba(255,255,255,.7)}
 .slide{position:absolute;inset:0;display:none;flex-direction:column;padding:44px 52px 60px;overflow:hidden;
   background:
-    radial-gradient(560px 280px at 100% -5%, rgba(230,39,57,.08), transparent 55%),
-    radial-gradient(480px 260px at -5% 105%, rgba(255,215,0,.14), transparent 50%),
+    radial-gradient(560px 280px at 100% -5%, rgba(230,39,57,.04), transparent 55%),
+    radial-gradient(480px 260px at -5% 105%, rgba(255,215,0,.06), transparent 50%),
     linear-gradient(180deg,#fcfaf8 0%, var(--glacier) 100%)}
 .slide.active{display:flex}
 .slide.active .reveal{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
@@ -45,37 +45,59 @@ h1,h2,h3,.display,.eyebrow,.num,.brand-mark{font-family:"Unbounded",sans-serif}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.slide.active .reveal{animation:none}}
 
-/* Flag abstraction layer */
-.flag-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.flag-sun{
-  position:absolute;right:-6%;top:42%;width:min(52%,520px);aspect-ratio:1;
-  transform:translateY(-50%);opacity:.16;animation:sunPulse 10s ease-in-out infinite
-}
-.flag-sun svg{width:100%;height:100%;display:block}
-.flag-sun.accent{opacity:.22;right:-4%;top:48%}
-.flag-rays{
-  position:absolute;left:-12%;bottom:-28%;width:min(48%,460px);aspect-ratio:1;
-  opacity:.11;transform:rotate(-18deg);animation:rayDrift 14s ease-in-out infinite
-}
-.flag-rays svg{width:100%;height:100%;display:block}
-.flag-arc{
+/* Subtle atmosphere: soft washes + hairlines */
+.atm{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.atm-wash{
   position:absolute;inset:0;
   background:
-    radial-gradient(circle at 88% 18%, transparent 62px, rgba(230,39,57,.07) 63px, rgba(230,39,57,.07) 66px, transparent 67px),
-    radial-gradient(circle at 88% 18%, transparent 42px, rgba(255,215,0,.1) 43px, rgba(255,215,0,.1) 45px, transparent 46px);
-  opacity:.9
+    radial-gradient(520px 300px at 100% 0%, rgba(230,39,57,.045), transparent 60%),
+    radial-gradient(480px 280px at 0% 100%, rgba(255,215,0,.055), transparent 55%),
+    linear-gradient(135deg, rgba(230,39,57,.02) 0%, transparent 42%, rgba(255,215,0,.03) 100%);
 }
-.flag-wash{
+.atm-veil{
   position:absolute;inset:0;
-  background:
-    linear-gradient(125deg, rgba(230,39,57,.04) 0%, transparent 38%, rgba(255,215,0,.06) 100%);
+  background:linear-gradient(180deg, rgba(252,250,248,.35) 0%, transparent 28%, transparent 72%, rgba(243,238,234,.4) 100%);
 }
-@keyframes sunPulse{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.03)}}
-@keyframes rayDrift{0%,100%{transform:rotate(-18deg) translate(0,0)}50%{transform:rotate(-14deg) translate(8px,-10px)}}
+.atm-lines{
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(-18deg, transparent 0 72px, rgba(26,21,32,.028) 72px 73px),
+    repeating-linear-gradient(72deg, transparent 0 96px, rgba(230,39,57,.018) 96px 97px);
+  mask-image:radial-gradient(ellipse at 85% 30%, #000 0%, transparent 72%);
+  opacity:.85;
+}
+.atm-lines::before,
+.atm-lines::after{
+  content:"";position:absolute;pointer-events:none;
+}
+.atm-lines::before{
+  right:8%;top:12%;width:1px;height:58%;
+  background:linear-gradient(180deg, transparent, rgba(230,39,57,.12), rgba(255,215,0,.08), transparent);
+  transform:rotate(12deg);transform-origin:top center;
+}
+.atm-lines::after{
+  left:6%;bottom:14%;width:42%;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(26,21,32,.07), rgba(230,39,57,.06), transparent);
+}
+.atm-ray{
+  position:absolute;right:-2%;top:50%;width:55%;height:55%;
+  transform:translateY(-50%);
+  background:
+    conic-gradient(from 200deg at 100% 50%,
+      transparent 0deg, rgba(230,39,57,.035) .4deg, transparent .8deg,
+      transparent 8deg, rgba(255,215,0,.03) 8.4deg, transparent 8.8deg,
+      transparent 16deg, rgba(230,39,57,.028) 16.4deg, transparent 16.8deg,
+      transparent 24deg, rgba(26,21,32,.02) 24.35deg, transparent 24.7deg,
+      transparent 32deg, rgba(230,39,57,.025) 32.4deg, transparent 32.8deg,
+      transparent 40deg, rgba(255,215,0,.025) 40.35deg, transparent 40.7deg,
+      transparent 48deg, rgba(230,39,57,.02) 48.35deg, transparent 48.7deg,
+      transparent 56deg, rgba(26,21,32,.018) 56.3deg, transparent 56.6deg,
+      transparent 360deg);
+  mask-image:radial-gradient(circle at 100% 50%, #000 0%, transparent 70%);
+  opacity:.9;
+}
 
-.mesh{position:absolute;inset:0;pointer-events:none;opacity:.28;z-index:0;
-  background-image:linear-gradient(rgba(26,21,32,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(26,21,32,.035) 1px,transparent 1px);
-  background-size:48px 48px;mask-image:radial-gradient(ellipse at 75% 20%,#000 15%,transparent 70%)}
+.mesh{display:none}
 
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.2em;
   text-transform:uppercase;color:var(--flag-red);position:relative;z-index:2}
@@ -92,13 +114,15 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 .subline{margin-top:18px;font-size:16px;line-height:1.5;color:var(--soft);max-width:38ch}
 .who{margin-top:22px;font-size:14px;color:var(--mist)}
 .logo-plane{display:grid;place-items:center;height:100%;min-height:260px;border-radius:24px;
-  border:1px solid rgba(230,39,57,.12);background:
-    radial-gradient(circle at 50% 45%,rgba(255,215,0,.22),transparent 55%),
-    radial-gradient(circle at 50% 55%,rgba(230,39,57,.08),transparent 60%),
-    rgba(255,255,255,.55);position:relative;overflow:hidden}
+  border:1px solid rgba(26,21,32,.06);background:
+    linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,215,0,.06) 45%, rgba(230,39,57,.04)),
+    rgba(255,255,255,.5);position:relative;overflow:hidden}
 .logo-plane::before{
-  content:"";position:absolute;inset:18% 22%;border-radius:50%;
-  border:1.5px solid rgba(230,39,57,.18);box-shadow:0 0 0 14px rgba(255,215,0,.08);pointer-events:none
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, transparent 18%, rgba(26,21,32,.035) 18.5%, transparent 19%),
+    linear-gradient(90deg, transparent 22%, rgba(230,39,57,.04) 22.4%, transparent 23%);
+  opacity:.7;
 }
 .logo-plane img{width:min(92%,400px);position:relative;z-index:1;filter:drop-shadow(0 12px 28px rgba(26,21,32,.12));animation:floatLogo 6s ease-in-out infinite}
 @keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -181,103 +205,11 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
   .slide{padding:26px 22px 56px}
   .title-grid,.split,.split-eq,.two-col,.econ,.pillars,.stats{grid-template-columns:1fr!important}
   .stat{border-right:none;border-bottom:1px solid var(--line)}
-  .flag-sun{width:70%;opacity:.12}.flag-rays{width:60%;opacity:.08}
   .foot{left:22px;right:22px}.prev{left:6px}.next{right:6px}.hint{display:none}
 }
 </style>
 </head>
 <body>
-<!-- Shared SVG defs for Kyrgyz sun / tunduk abstraction -->
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <defs>
-    <symbol id="kg-sun" viewBox="0 0 200 200">
-      <!-- 40 rays -->
-      <g fill="#e62739">
-        <g id="ray-pair">
-          <path d="M100 8 L104.2 38 L95.8 38 Z"/>
-          <path d="M100 8 L104.2 38 L95.8 38 Z" transform="rotate(9 100 100)"/>
-        </g>
-        <use href="#ray-pair" transform="rotate(18 100 100)"/>
-        <use href="#ray-pair" transform="rotate(36 100 100)"/>
-        <use href="#ray-pair" transform="rotate(54 100 100)"/>
-        <use href="#ray-pair" transform="rotate(72 100 100)"/>
-        <use href="#ray-pair" transform="rotate(90 100 100)"/>
-        <use href="#ray-pair" transform="rotate(108 100 100)"/>
-        <use href="#ray-pair" transform="rotate(126 100 100)"/>
-        <use href="#ray-pair" transform="rotate(144 100 100)"/>
-        <use href="#ray-pair" transform="rotate(162 100 100)"/>
-        <use href="#ray-pair" transform="rotate(180 100 100)"/>
-        <use href="#ray-pair" transform="rotate(198 100 100)"/>
-        <use href="#ray-pair" transform="rotate(216 100 100)"/>
-        <use href="#ray-pair" transform="rotate(234 100 100)"/>
-        <use href="#ray-pair" transform="rotate(252 100 100)"/>
-        <use href="#ray-pair" transform="rotate(270 100 100)"/>
-        <use href="#ray-pair" transform="rotate(288 100 100)"/>
-        <use href="#ray-pair" transform="rotate(306 100 100)"/>
-        <use href="#ray-pair" transform="rotate(324 100 100)"/>
-        <use href="#ray-pair" transform="rotate(342 100 100)"/>
-      </g>
-      <circle cx="100" cy="100" r="34" fill="#ffd700"/>
-      <circle cx="100" cy="100" r="28" fill="none" stroke="#e62739" stroke-width="3.5"/>
-      <!-- tunduk arcs -->
-      <g fill="none" stroke="#e62739" stroke-width="2.2" stroke-linecap="round">
-        <path d="M78 100 Q100 72 122 100 Q100 128 78 100"/>
-        <path d="M82 100 Q100 78 118 100 Q100 122 82 100"/>
-        <path d="M86 100 Q100 84 114 100 Q100 116 86 100"/>
-        <path d="M100 78 Q128 100 100 122 Q72 100 100 78"/>
-        <path d="M100 82 Q122 100 100 118 Q78 100 100 82"/>
-        <path d="M100 86 Q116 100 100 114 Q84 100 100 86"/>
-      </g>
-    </symbol>
-    <symbol id="kg-rays-only" viewBox="0 0 200 200">
-      <g fill="#ffd700" opacity=".9">
-        <path d="M100 4 L106 42 L94 42 Z"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(18 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(36 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(54 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(72 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(90 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(108 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(126 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(144 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(162 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(180 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(198 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(216 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(234 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(252 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(270 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(288 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(306 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(324 100 100)"/>
-        <path d="M100 4 L106 42 L94 42 Z" transform="rotate(342 100 100)"/>
-      </g>
-      <g fill="#e62739" opacity=".55">
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(9 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(27 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(45 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(63 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(81 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(99 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(117 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(135 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(153 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(171 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(189 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(207 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(225 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(243 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(261 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(279 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(297 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(315 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(333 100 100)"/>
-        <path d="M100 18 L104 46 L96 46 Z" transform="rotate(351 100 100)"/>
-      </g>
-    </symbol>
-  </defs>
-</svg>
-
 <div class="stage">
   <div class="frame">
     <button class="nav-btn prev" id="prevBtn" type="button">‹</button>
@@ -285,13 +217,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 1 Title -->
     <section class="slide active">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-arc"></div>
-        <div class="flag-sun accent"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
-        <div class="flag-rays"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="title-grid">
         <div>
           <div class="kick reveal">Council of Delegates</div>
@@ -306,11 +237,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 2 Who -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-sun"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">02</span><span class="sep">»</span> Кто мы</div>
       <h2 class="reveal d1">Президент KgPMU</h2>
       <div class="body split">
@@ -333,12 +265,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 3 Country -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-rays" style="left:auto;right:-18%;bottom:-22%;opacity:.14;transform:rotate(12deg)"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
-        <div class="flag-sun" style="right:auto;left:-10%;top:70%;opacity:.12"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">03</span><span class="sep">»</span> О стране</div>
       <h2 class="reveal d1">Кыргызская Республика</h2>
       <p class="lead reveal d2">Стратегическое положение, природа, культура и цифровая повестка</p>
@@ -367,11 +299,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 4 Economy -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-sun" style="opacity:.13"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">04</span><span class="sep">»</span> Экономика</div>
       <h2 class="reveal d1">Показатели и позиция в мире</h2>
       <p class="lead reveal d2">Один из самых быстрорастущих рынков региона — с активной стройкой, сервисами и цифровой повесткой</p>
@@ -393,13 +326,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 5 Mission -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-arc"></div>
-        <div class="flag-sun accent"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
-        <div class="flag-rays"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">05</span><span class="sep">»</span> Миссия</div>
       <h2 class="reveal d1">Миссия KgPMU</h2>
       <div class="body">
@@ -411,11 +343,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 6 Demand + goals -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-sun" style="opacity:.12"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">06</span><span class="sep">»</span> Стратегия</div>
       <h2 class="reveal d1">Спрос и цели</h2>
       <div class="body two-col">
@@ -444,11 +377,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 7 Ecosystem -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-rays" style="opacity:.12"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">07</span><span class="sep">»</span> Экосистема</div>
       <h2 class="reveal d1">Экосистема и продвижение</h2>
       <div class="body pillars">
@@ -462,11 +396,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 8 Done -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-sun" style="opacity:.14"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">08</span><span class="sep">»</span> Результаты</div>
       <h2 class="reveal d1">Что уже сделано</h2>
       <div class="body t-wrap timeline">
@@ -480,13 +415,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 9 Ask -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-arc"></div>
-        <div class="flag-sun accent"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
-        <div class="flag-rays"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="eyebrow reveal"><span class="idx">09</span><span class="sep">»</span> Council of Delegates</div>
       <h2 class="reveal d1">Благодарим делегатов</h2>
       <div class="body">
@@ -501,13 +435,12 @@ h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-h
 
     <!-- 10 Thanks -->
     <section class="slide">
-      <div class="flag-bg">
-        <div class="flag-wash"></div>
-        <div class="flag-arc"></div>
-        <div class="flag-sun accent"><svg viewBox="0 0 200 200"><use href="#kg-sun"/></svg></div>
-        <div class="flag-rays"><svg viewBox="0 0 200 200"><use href="#kg-rays-only"/></svg></div>
+      <div class="atm" aria-hidden="true">
+        <div class="atm-wash"></div>
+        <div class="atm-ray"></div>
+        <div class="atm-lines"></div>
+        <div class="atm-veil"></div>
       </div>
-      <div class="mesh"></div>
       <div class="title-grid">
         <div>
           <div class="kick reveal">Спасибо за внимание</div>
