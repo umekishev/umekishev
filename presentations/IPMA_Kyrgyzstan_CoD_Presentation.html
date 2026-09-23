@@ -3,524 +3,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPMA Kyrgyz Republic · Council of Delegates</title>
+<title>IPMA Kyrgyz Republic · KgPMU · Council of Delegates</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
 <style>
 :root{
-  --ink:#07182a;
-  --ink-mid:#0f2c45;
-  --glacier:#e8eef2;
-  --snow:#f7fafb;
-  --mist:#9aafbd;
-  --pine:#1f8f5f;
-  --pine-glow:#3dd68c;
-  --signal:#e30613;
-  --text:#122433;
-  --soft:#3d5566;
-  --rail:56px;
-  --deck-w:1280px;
-  --deck-h:720px;
+  --ink:#07182a; --ink-mid:#0f2c45; --glacier:#e8eef2; --snow:#f7fafb;
+  --mist:#9aafbd; --pine:#1f8f5f; --pine-glow:#3dd68c; --signal:#e30613;
+  --text:#122433; --soft:#3d5566;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  font-family:"Onest",system-ui,sans-serif;
-  color:var(--text);
+  font-family:"Onest",system-ui,sans-serif;color:var(--text);
   background:
     radial-gradient(900px 500px at 20% -10%, #1f8f5f22, transparent 55%),
     radial-gradient(800px 480px at 90% 110%, #0f2c4566, transparent 50%),
     linear-gradient(165deg,#0b1c2e 0%, #13283c 45%, #0a1624 100%);
-  display:flex;align-items:center;justify-content:center;
-  min-height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,.display,.eyebrow,.num,.brand-mark{font-family:"Unbounded",sans-serif}
-
 .stage{width:min(96vw,1280px);position:relative}
-.frame{
-  position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;
-  background:var(--glacier);
-  box-shadow:
-    0 50px 120px -48px rgba(0,0,0,.75),
-    inset 0 0 0 1px rgba(255,255,255,.12);
-}
-.slide{
-  position:absolute;inset:0;display:none;flex-direction:column;
-  padding:48px 56px 64px;overflow:hidden;
-}
+.frame{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:var(--glacier);
+  box-shadow:0 50px 120px -48px rgba(0,0,0,.75), inset 0 0 0 1px rgba(255,255,255,.12)}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:44px 52px 60px;overflow:hidden}
 .slide.active{display:flex}
 .slide.active .reveal{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
 .slide.active .reveal.d1{animation-delay:.06s}
 .slide.active .reveal.d2{animation-delay:.14s}
 .slide.active .reveal.d3{animation-delay:.22s}
 .slide.active .reveal.d4{animation-delay:.3s}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.slide.active .reveal{animation:none}}
 
-/* atmospheres */
-.slide.light{
-  background:
-    radial-gradient(700px 320px at 100% 0%, #1f8f5f14, transparent 55%),
-    linear-gradient(180deg, #f4f8fa 0%, var(--glacier) 100%);
-  color:var(--text);
-}
-.slide.dark{
-  background:
-    radial-gradient(900px 420px at 85% 15%, #1f8f5f33, transparent 50%),
-    radial-gradient(700px 380px at 0% 100%, #e3061322, transparent 45%),
-    linear-gradient(155deg, var(--ink) 0%, var(--ink-mid) 55%, #050f1a 100%);
-  color:#e8f0f5;
-}
+.slide.light{background:radial-gradient(700px 320px at 100% 0%, #1f8f5f14, transparent 55%),linear-gradient(180deg,#f4f8fa 0%,var(--glacier) 100%)}
+.slide.dark{background:radial-gradient(900px 420px at 85% 15%, #1f8f5f33, transparent 50%),radial-gradient(700px 380px at 0% 100%, #e3061322, transparent 45%),linear-gradient(155deg,var(--ink) 0%,var(--ink-mid) 55%,#050f1a 100%);color:#e8f0f5}
 .slide.dark h1,.slide.dark h2{color:#fff}
+.mesh{position:absolute;inset:0;pointer-events:none;opacity:.32;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse at 70% 40%,#000 20%,transparent 70%)}
+.slide.light .mesh{opacity:.35;
+  background-image:linear-gradient(rgba(7,24,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(7,24,42,.04) 1px,transparent 1px);
+  mask-image:radial-gradient(ellipse at 80% 0%,#000 10%,transparent 65%)}
+.chevron-orb{position:absolute;right:-8%;bottom:-18%;font-family:"Unbounded",sans-serif;font-weight:800;
+  font-size:clamp(180px,28vw,320px);line-height:.8;color:var(--signal);opacity:.13;letter-spacing:-.08em;
+  pointer-events:none;animation:drift 9s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,-14px)}}
 
-.mesh{
-  position:absolute;inset:0;pointer-events:none;opacity:.35;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size:48px 48px;
-  mask-image:radial-gradient(ellipse at 70% 40%, #000 20%, transparent 70%);
-}
-.slide.light .mesh{
-  opacity:.4;
-  background-image:
-    linear-gradient(rgba(7,24,42,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7,24,42,.045) 1px, transparent 1px);
-  mask-image:radial-gradient(ellipse at 80% 0%, #000 10%, transparent 65%);
-}
-
-.chevron-orb{
-  position:absolute;right:-8%;bottom:-18%;
-  font-family:"Unbounded",sans-serif;font-weight:800;
-  font-size:clamp(180px,28vw,340px);line-height:.8;
-  color:var(--signal);opacity:.14;letter-spacing:-.08em;
-  pointer-events:none;user-select:none;
-  animation:drift 9s ease-in-out infinite;
-}
-@keyframes drift{
-  0%,100%{transform:translate(0,0) rotate(0)}
-  50%{transform:translate(-12px,-18px) rotate(-2deg)}
-}
-
-.eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--pine);position:relative;z-index:2;
-}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--pine);position:relative;z-index:2}
 .slide.dark .eyebrow{color:var(--pine-glow)}
-.eyebrow .idx{opacity:.4;font-variant-numeric:tabular-nums;color:inherit}
-.eyebrow .sep{color:var(--signal);letter-spacing:0;opacity:.9}
-
-h2{
-  font-size:clamp(26px,3.4vw,40px);font-weight:800;letter-spacing:-.03em;
-  line-height:1.05;margin:14px 0 8px;max-width:16ch;position:relative;z-index:2;
-}
-.lead{
-  font-size:16.5px;line-height:1.55;color:var(--soft);max-width:48ch;
-  position:relative;z-index:2;
-}
+.eyebrow .idx{opacity:.4}.eyebrow .sep{color:var(--signal);letter-spacing:0}
+h2{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:12px 0 8px;max-width:20ch;position:relative;z-index:2}
+.lead{font-size:15.5px;line-height:1.5;color:var(--soft);max-width:54ch;position:relative;z-index:2}
 .slide.dark .lead{color:#a9c0d0}
+.body{flex:1;min-height:0;margin-top:22px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
 
-.body{flex:1;min-height:0;margin-top:28px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
-
-/* title composition */
-.title-grid{
-  display:grid;grid-template-columns:1.05fr .95fr;gap:32px;
-  flex:1;align-items:center;position:relative;z-index:2;
-}
-.kick{
-  display:inline-flex;align-items:center;gap:10px;
-  border:1px solid rgba(61,214,140,.35);
-  background:rgba(61,214,140,.08);
-  color:var(--pine-glow);
-  font-family:"Unbounded",sans-serif;font-weight:700;font-size:11px;
-  letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 16px;border-radius:999px;margin-bottom:22px;
-}
-.display{
-  font-size:clamp(40px,6.2vw,72px);font-weight:800;letter-spacing:-.045em;
-  line-height:.95;color:#fff;
-}
-.display .thin{font-weight:500;opacity:.72}
-.subline{margin-top:22px;font-size:17px;line-height:1.5;color:#b7cbd8;max-width:34ch}
-.who{margin-top:28px;font-size:14px;color:#7f9aab;letter-spacing:.02em}
-.logo-plane{
-  display:grid;place-items:center;height:100%;min-height:280px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(61,214,140,.12), transparent 60%);
-  border-radius:24px;
-  border:1px solid rgba(255,255,255,.08);
-  position:relative;overflow:hidden;
-}
-.logo-plane::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg, transparent 40%, rgba(227,6,19,.08) 100%);
-}
-.logo-plane img{width:min(92%,420px);height:auto;position:relative;z-index:1;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));
-  animation:floatLogo 6s ease-in-out infinite}
+.title-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;flex:1;align-items:center;position:relative;z-index:2}
+.kick{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(61,214,140,.35);background:rgba(61,214,140,.08);
+  color:var(--pine-glow);font-family:"Unbounded",sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;padding:9px 16px;border-radius:999px;margin-bottom:20px}
+.display{font-size:clamp(34px,5.4vw,58px);font-weight:800;letter-spacing:-.04em;line-height:.98;color:#fff}
+.subline{margin-top:18px;font-size:16px;line-height:1.5;color:#b7cbd8;max-width:38ch}
+.who{margin-top:22px;font-size:14px;color:#7f9aab}
+.logo-plane{display:grid;place-items:center;height:100%;min-height:260px;border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);background:radial-gradient(circle at 50% 50%,rgba(61,214,140,.12),transparent 60%);position:relative;overflow:hidden}
+.logo-plane img{width:min(92%,400px);position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));animation:floatLogo 6s ease-in-out infinite}
 @keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* content patterns — avoid card clusters */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.rule-list{list-style:none;display:flex;flex-direction:column;gap:0}
-.rule-list li{
-  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;
-  padding:16px 0;border-bottom:1px solid rgba(18,36,51,.1);
-  font-size:15.5px;line-height:1.45;color:var(--soft);
-}
-.slide.dark .rule-list li{border-bottom-color:rgba(255,255,255,.1);color:#c5d6e2}
-.rule-list .mark{
-  font-family:"Unbounded",sans-serif;font-weight:700;font-size:13px;color:var(--pine);
-  min-width:1.5ch;
-}
-.slide.dark .rule-list .mark{color:var(--pine-glow)}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+.split-eq{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.role{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+.person h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+.person p{font-size:14px;line-height:1.5;color:var(--soft)}
+.badge{display:inline-block;margin-top:12px;padding:6px 12px;border-radius:999px;background:rgba(31,143,95,.12);
+  color:var(--pine);font-size:12px;font-weight:700;border:1px solid rgba(31,143,95,.25)}
+.side-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.side-list li{padding:12px 0;border-bottom:1px solid rgba(18,36,51,.1);font-size:13.5px;line-height:1.4;color:var(--soft)}
+.side-list li strong{display:block;color:var(--text);font-size:13px;margin-bottom:2px}
 
-.person h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
-.person .role{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);margin-bottom:12px}
-.person p{font-size:14.5px;line-height:1.5;color:var(--soft)}
-.quote{
-  margin-top:16px;padding-left:14px;border-left:3px solid var(--signal);
-  font-size:14px;line-height:1.45;color:var(--text);font-style:italic;
-}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(18,36,51,.12);border-bottom:1px solid rgba(18,36,51,.12)}
+.stat{padding:18px 14px 18px 0;border-right:1px solid rgba(18,36,51,.1)}
+.stat:last-child{border-right:none}
+.stat .num{font-family:"Unbounded",sans-serif;font-size:clamp(20px,2.6vw,28px);font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1}
+.stat .label{margin-top:8px;font-size:12px;color:var(--soft);line-height:1.35}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;background:rgba(31,143,95,.1);color:var(--pine);border:1px solid rgba(31,143,95,.2)}
 
-.mission-type{
-  font-family:"Unbounded",sans-serif;font-weight:700;
-  font-size:clamp(22px,3vw,36px);line-height:1.28;letter-spacing:-.025em;
-  max-width:22ch;color:#fff;
-}
+.econ{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.econ-item{padding-top:14px;border-top:2px solid var(--pine)}
+.econ-item .v{font-family:"Unbounded",sans-serif;font-weight:800;font-size:clamp(22px,2.8vw,30px);color:var(--ink);letter-spacing:-.03em}
+.econ-item .l{margin-top:6px;font-size:13px;color:var(--soft);line-height:1.4}
+.note{margin-top:16px;font-size:12px;color:var(--mist)}
+
+.mission-type{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(20px,2.8vw,32px);line-height:1.28;letter-spacing:-.025em;max-width:28ch;color:#fff}
 .mission-type em{font-style:normal;color:var(--pine-glow)}
+.mission-side{margin-top:24px;font-size:14.5px;line-height:1.5;color:#a9c0d0;max-width:42ch}
 
-.stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  border-top:1px solid rgba(18,36,51,.12);
-  border-bottom:1px solid rgba(18,36,51,.12);
-}
-.stat{padding:22px 18px 22px 0;border-right:1px solid rgba(18,36,51,.1)}
-.stat:last-child{border-right:none;padding-right:0}
-.stat .num{font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1}
-.stat .label{margin-top:8px;font-size:12.5px;color:var(--soft);line-height:1.35}
+.two-col{display:grid;grid-template-columns:1fr 1.15fr;gap:36px;align-items:start}
+.rule-list{list-style:none}
+.rule-list li{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:11px 0;border-bottom:1px solid rgba(18,36,51,.1);font-size:14px;line-height:1.4;color:var(--soft)}
+.rule-list .mark{font-family:"Unbounded",sans-serif;font-weight:700;font-size:12px;color:var(--pine)}
+.sector-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 
-.timeline{display:flex;flex-direction:column;gap:0;position:relative}
-.timeline::before{
-  content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;
-  background:linear-gradient(180deg, var(--pine), rgba(31,143,95,.15));
-}
-.t-item{display:grid;grid-template-columns:16px 110px 1fr;gap:18px;padding:14px 0;align-items:start}
-.t-item .dot{
-  width:16px;height:16px;border-radius:50%;background:var(--snow);
-  border:3px solid var(--pine);position:relative;z-index:1;margin-top:2px;
-}
-.t-item .yr{font-family:"Unbounded",sans-serif;font-weight:700;font-size:13px;color:var(--pine);letter-spacing:.02em}
-.t-item strong{display:block;font-size:15.5px;font-weight:700;color:var(--text);margin-bottom:3px}
-.t-item p{font-size:13.5px;color:var(--soft);line-height:1.4}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px}
+.pillar{padding-top:14px;border-top:2px solid var(--pine)}
+.pillar h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.pillar p{font-size:13.5px;line-height:1.45;color:var(--soft)}
 
-.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.level{padding:8px 0}
-.level .lv{
-  font-family:"Unbounded",sans-serif;font-weight:800;font-size:48px;letter-spacing:-.04em;
-  color:var(--ink);line-height:1;
-  background:linear-gradient(180deg, var(--ink), var(--pine));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-.level .nm{margin-top:10px;font-family:"Unbounded",sans-serif;font-weight:700;font-size:13px;color:var(--text)}
-.level .en{margin-top:4px;font-size:12.5px;color:var(--soft)}
+.timeline{display:flex;flex-direction:column}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--pine),rgba(31,143,95,.15))}
+.t-wrap{position:relative}
+.t-item{display:grid;grid-template-columns:16px 1fr;gap:16px;padding:12px 0;align-items:start}
+.t-item .dot{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--pine);z-index:1;margin-top:2px}
+.t-item strong{display:block;font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:3px}
+.t-item p{font-size:13px;color:var(--soft);line-height:1.4}
 
-.pillars{display:grid;grid-template-columns:1fr 1fr;gap:28px 48px}
-.pillar{padding-top:16px;border-top:2px solid var(--pine)}
-.pillar h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.02em}
-.pillar p{font-size:14px;line-height:1.45;color:var(--soft)}
+.ask-box{margin-top:22px;padding:18px 20px;border-radius:14px;border:1px solid rgba(61,214,140,.3);background:rgba(61,214,140,.08)}
+.ask-box p{font-size:15px;line-height:1.5;color:#d7e8f0}
+.contacts{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:24px}
+.contacts a,.contacts span{font-family:"Unbounded",sans-serif;font-weight:600;font-size:14px;color:var(--pine-glow);text-decoration:none}
 
-.stripe{
-  margin-top:auto;padding:16px 20px;border-radius:12px;
-  background:linear-gradient(90deg, var(--ink), var(--ink-mid));
-  color:#fff;font-family:"Unbounded",sans-serif;font-weight:700;font-size:14px;
-  letter-spacing:-.01em;
-}
-
-.mem-rows{display:flex;flex-direction:column;gap:0}
-.mem-row{
-  display:grid;grid-template-columns:100px 1fr;gap:24px;align-items:baseline;
-  padding:18px 0;border-bottom:1px solid rgba(18,36,51,.1);
-}
-.mem-row .y{font-family:"Unbounded",sans-serif;font-weight:800;font-size:28px;color:var(--pine);letter-spacing:-.03em}
-.mem-row p{font-size:16px;color:var(--text)}
-
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.tag{
-  font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:999px;
-  background:rgba(31,143,95,.1);color:var(--pine);border:1px solid rgba(31,143,95,.2);
-}
-
-.foot{
-  position:absolute;left:56px;right:56px;bottom:20px;
-  display:flex;align-items:center;justify-content:space-between;z-index:5;
-}
-.brand-mark{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mist)}
-.brand-mark img{height:22px;width:auto;opacity:.85}
+.foot{position:absolute;left:52px;right:52px;bottom:18px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.brand-mark{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;color:var(--mist)}
+.brand-mark img{height:20px;opacity:.85}
 .slide.dark .brand-mark{color:#7f96a8}
 .slide.dark .brand-mark img{filter:brightness(0) invert(1);opacity:.7}
-.pg{font-family:"Unbounded",sans-serif;font-weight:700;font-size:11px;color:var(--mist);font-variant-numeric:tabular-nums}
+.pg{font-family:"Unbounded",sans-serif;font-weight:700;font-size:11px;color:var(--mist)}
 .slide.dark .pg{color:#7f96a8}
 
-.nav-btn{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:20;
-  width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.15);
-  background:rgba(7,24,42,.55);backdrop-filter:blur(8px);color:#fff;
-  cursor:pointer;font-size:22px;display:grid;place-items:center;
-  transition:background .2s, transform .2s;
-}
-.nav-btn:hover{background:var(--pine);transform:translateY(-50%) scale(1.06)}
-.prev{left:-22px}.next{right:-22px}
-
-.rail{margin-top:18px;display:flex;align-items:center;gap:14px;color:#9eb4c4}
-.counter{font-family:"Unbounded",sans-serif;font-weight:700;font-size:13px;min-width:70px;color:#d5e4ee}
+.nav-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);background:rgba(7,24,42,.55);backdrop-filter:blur(8px);color:#fff;
+  cursor:pointer;font-size:22px;display:grid;place-items:center}
+.nav-btn:hover{background:var(--pine)}.prev{left:-22px}.next{right:-22px}
+.rail{margin-top:16px;display:flex;align-items:center;gap:14px;color:#9eb4c4}
+.counter{font-family:"Unbounded",sans-serif;font-weight:700;font-size:13px;min-width:64px;color:#d5e4ee}
 .track{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
-.fill{height:100%;width:0;background:linear-gradient(90deg, var(--pine-glow), var(--signal));transition:width .35s ease}
-.tool{
-  width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);color:#d5e4ee;cursor:pointer;display:grid;place-items:center;
-}
-.tool:hover{background:var(--pine);color:#fff;border-color:transparent}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--pine-glow),var(--signal));transition:width .35s}
+.tool{width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#d5e4ee;cursor:pointer;display:grid;place-items:center}
 .hint{font-size:12px;opacity:.7}
 .hint kbd{border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:1px 6px;font-size:11px}
-
-.contacts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:28px}
-.contacts a,.contacts span{
-  font-family:"Unbounded",sans-serif;font-weight:600;font-size:14px;
-  color:var(--pine-glow);text-decoration:none;letter-spacing:.01em;
-}
-
-@media (max-width:900px){
-  .slide{padding:28px 24px 58px}
-  .title-grid,.split,.levels,.pillars,.stats{grid-template-columns:1fr!important}
+@media(max-width:900px){
+  .slide{padding:26px 22px 56px}
+  .title-grid,.split,.split-eq,.two-col,.econ,.pillars,.stats{grid-template-columns:1fr!important}
   .stat{border-right:none;border-bottom:1px solid rgba(18,36,51,.1)}
-  .foot{left:24px;right:24px}
-  .prev{left:6px}.next{right:6px}
-  .hint{display:none}
-  .t-item{grid-template-columns:16px 1fr;gap:12px}
-  .t-item .yr{grid-column:2}
+  .foot{left:22px;right:22px}.prev{left:6px}.next{right:6px}.hint{display:none}
 }
 </style>
 </head>
 <body>
 <div class="stage">
-  <div class="frame" id="frame">
-    <button class="nav-btn prev" id="prevBtn" type="button" aria-label="Назад">‹</button>
-    <button class="nav-btn next" id="nextBtn" type="button" aria-label="Далее">›</button>
+  <div class="frame">
+    <button class="nav-btn prev" id="prevBtn" type="button">‹</button>
+    <button class="nav-btn next" id="nextBtn" type="button">›</button>
 
-    <!-- 01 Title -->
+    <!-- 1 Title -->
     <section class="slide dark active">
-      <div class="mesh"></div>
-      <div class="chevron-orb" aria-hidden="true">»</div>
+      <div class="mesh"></div><div class="chevron-orb">»</div>
       <div class="title-grid">
         <div>
           <div class="kick reveal">Council of Delegates</div>
-          <h1 class="display reveal d1">IPMA<br><span class="thin">Kyrgyz</span><br>Republic</h1>
-          <p class="subline reveal d2">Кыргызское объединение управления проектами — Ассоциация-заявитель IPMA</p>
-          <p class="who reveal d3">Урмат Мекишев · Президент KgPMU</p>
+          <h1 class="display reveal d1">Кыргызское объединение управления проектами</h1>
+          <p class="subline reveal d2">ОО «KgPMU» · Kyrgyz Project Management Union · ipma.kg</p>
+          <p class="who reveal d3">Представляет: Урмат Мекишев, Президент KgPMU</p>
         </div>
-        <div class="logo-plane reveal d2">
-          <img src="assets/ipma-kr-logo-white.png" alt="IPMA Kyrgyz Republic">
-        </div>
+        <div class="logo-plane reveal d2"><img src="assets/ipma-kr-logo-white.png" alt="IPMA Kyrgyz Republic"></div>
       </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> ipma.kg</div><div class="pg">01 / 12</div></div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">01 / 10</div></div>
     </section>
 
-    <!-- 02 Who -->
+    <!-- 2 Who -->
     <section class="slide light">
       <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">02</span><span class="sep">»</span> Введение</div>
-      <h2 class="reveal d1">Кто ведёт ассоциацию</h2>
+      <div class="eyebrow reveal"><span class="idx">02</span><span class="sep">»</span> Кто мы</div>
+      <h2 class="reveal d1">Президент KgPMU</h2>
       <div class="body split">
         <article class="person reveal d2">
-          <div class="role">Президент</div>
-          <h3>Мекишев Урмат Казбекович</h3>
-          <p>Сертифицированный эксперт IPMA. Более 15 лет в управлении крупными инфраструктурными проектами. Инициатор внедрения стандартов ICB4 в госсекторе и бизнесе Кыргызстана.</p>
-          <p class="quote">«Создать в Кыргызстане профессиональное сообщество лидеров, способных реализовывать проекты мирового уровня.»</p>
+          <div class="role">Мекишев Урмат Казбекович</div>
+          <h3>Президент KgPMU · сертифицированный эксперт IPMA</h3>
+          <p>Проектный менеджер и бизнес-аналитик с более чем 15-летним опытом в цифровизации, автоматизации и управлении проектами. Обладатель международной сертификации <strong>IPMA Level B</strong> (Certified Senior Project Manager).</p>
+          <p style="margin-top:10px">Руководил проектами цифровизации государственных систем, внедрения геоинформационных технологий и автоматизации бизнес-процессов — в том числе в сфере таможенных и муниципальных цифровых сервисов.</p>
+          <span class="badge">IPMA Level B · GovTech · Digital Transformation</span>
         </article>
-        <article class="person reveal d3">
-          <div class="role">Почётный член</div>
-          <h3>Бабаев Игбал Алиджанович</h3>
-          <p>Д.т.н., профессор, президент Азербайджанской ассоциации управления проектами. Поддерживает развитие проектной культуры и компетенций в Кыргызстане и регионе.</p>
-        </article>
+        <ul class="side-list reveal d3">
+          <li><strong>Государственные проекты</strong>Цифровизация и автоматизация сервисов госсектора</li>
+          <li><strong>Геоинформационные решения</strong>Проекты цифровой инвентаризации и открытых данных</li>
+          <li><strong>Признание</strong>Благодарности и награды госорганов и международных организаций</li>
+          <li><strong>Сообщество</strong>Развитие профессиональных стандартов IPMA в Кыргызстане</li>
+        </ul>
       </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">02 / 12</div></div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">02 / 10</div></div>
     </section>
 
-    <!-- 03 Mission -->
-    <section class="slide dark">
-      <div class="mesh"></div>
-      <div class="chevron-orb" aria-hidden="true">»</div>
-      <div class="eyebrow reveal"><span class="idx">03</span><span class="sep">»</span> Миссия</div>
-      <div class="body">
-        <p class="mission-type reveal d1">Экосистема компетентных проектных лидеров — через образование, <em>сертификацию</em> и практики <em>IPMA ICB4</em>.</p>
-        <p class="lead reveal d2" style="margin-top:28px;max-width:40ch">Повышаем зрелость управления проектами государства и бизнеса в Кыргызстане.</p>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> ipma.kg</div><div class="pg">03 / 12</div></div>
-    </section>
-
-    <!-- 04 Values -->
+    <!-- 3 Country -->
     <section class="slide light">
       <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">04</span><span class="sep">»</span> Ценности</div>
-      <h2 class="reveal d1">На чём стоим</h2>
-      <div class="body pillars">
-        <div class="pillar reveal d1"><h3>Честность</h3><p>Прозрачность и этика в работе ассоциации и оценке компетенций</p></div>
-        <div class="pillar reveal d2"><h3>Ответственность</h3><p>Профессионализм мирового уровня в каждом проекте и решении</p></div>
-        <div class="pillar reveal d3"><h3>Уважение и доверие</h3><p>Беспристрастность и независимость сертификации</p></div>
-        <div class="pillar reveal d4"><h3>Открытость</h3><p>Лучшие международные практики — на пользу Кыргызской Республики</p></div>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">04 / 12</div></div>
-    </section>
-
-    <!-- 05 Country -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">05</span><span class="sep">»</span> Контекст</div>
-      <h2 class="reveal d1">Кыргызстан</h2>
-      <p class="lead reveal d2">Центральная Азия — пересечение маршрутов ЕАЭС и Большого Шёлкового пути</p>
+      <div class="eyebrow reveal"><span class="idx">03</span><span class="sep">»</span> О стране</div>
+      <h2 class="reveal d1">Кыргызская Республика</h2>
+      <p class="lead reveal d2">Стратегическое положение, природа, культура и цифровая повестка</p>
       <div class="body">
         <div class="stats reveal d2">
-          <div class="stat"><div class="num">≈200k</div><div class="label">км² территории</div></div>
-          <div class="stat"><div class="num">7,4 млн</div><div class="label">население</div></div>
-          <div class="stat"><div class="num">Бишкек</div><div class="label">штаб-квартира KgPMU</div></div>
-          <div class="stat"><div class="num">ЕАЭС</div><div class="label">единое пространство</div></div>
+          <div class="stat"><div class="num">≈200 тыс.</div><div class="label">км² · сердце Центральной Азии</div></div>
+          <div class="stat"><div class="num">≈7,4 млн</div><div class="label">население</div></div>
+          <div class="stat"><div class="num">ЕАЭС</div><div class="label">единое экономическое пространство</div></div>
+          <div class="stat"><div class="num">WNG</div><div class="label">Всемирные игры кочевников</div></div>
         </div>
-        <div class="tags reveal d3">
-          <span class="tag">Госуправление</span><span class="tag">Инфраструктура</span><span class="tag">Цифровизация</span>
-          <span class="tag">Строительство</span><span class="tag">IT</span><span class="tag">Медицина и НПО</span>
+        <div class="split-eq" style="margin-top:20px">
+          <ul class="side-list reveal d3">
+            <li><strong>Стратегическое положение</strong>Пересечение маршрутов ЕАЭС и Большого Шёлкового пути</li>
+            <li><strong>Соседи</strong>Казахстан, Узбекистан, Таджикистан, Китай</li>
+            <li><strong>Природа и культура</strong>Горная страна, кочевое наследие, гостеприимство</li>
+          </ul>
+          <ul class="side-list reveal d4">
+            <li><strong>Всемирные игры кочевников</strong>Глобальная витрина культуры и soft power Кыргызстана</li>
+            <li><strong>Цифровизация</strong>Госуслуги, таможня, реестры — устойчивый спрос на P3M</li>
+            <li><strong>Возможность для IPMA</strong>Растущая потребность в компетентных руководителях проектов</li>
+          </ul>
         </div>
       </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">05 / 12</div></div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">03 / 10</div></div>
     </section>
 
-    <!-- 06 Path -->
+    <!-- 4 Economy -->
     <section class="slide light">
       <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">06</span><span class="sep">»</span> Путь</div>
-      <h2 class="reveal d1">Уже сделано</h2>
-      <div class="body timeline">
-        <div class="t-item reveal d1"><div class="dot"></div><div class="yr">апр 2026</div><div><strong>Регистрация в Минюсте КР</strong><p>ОО «Кыргызское объединение управления проектами»</p></div></div>
-        <div class="t-item reveal d2"><div class="dot"></div><div class="yr">июн 2026</div><div><strong>Документы в IPMA</strong><p>Пакет направлен в штаб-квартиру в Швейцарии</p></div></div>
-        <div class="t-item reveal d3"><div class="dot"></div><div class="yr">июл 2026</div><div><strong>Ассоциация-заявитель</strong><p>Статус Applying Member Association</p></div></div>
-        <div class="t-item reveal d4"><div class="dot"></div><div class="yr">окт 2026</div><div><strong>План Full MA</strong><p>Полноправное членство и запуск сертификации</p></div></div>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> ipma.kg/ru/news</div><div class="pg">06 / 12</div></div>
-    </section>
-
-    <!-- 07 Goals -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">07</span><span class="sep">»</span> Стратегия</div>
-      <h2 class="reveal d1">Куда идём</h2>
+      <div class="eyebrow reveal"><span class="idx">04</span><span class="sep">»</span> Экономика</div>
+      <h2 class="reveal d1">Показатели и позиция в мире</h2>
+      <p class="lead reveal d2">Один из самых быстрорастущих рынков региона — с активной стройкой, сервисами и цифровой повесткой</p>
       <div class="body">
-        <ul class="rule-list">
-          <li class="reveal d1"><span class="mark">01</span>Перейти от Ассоциации-заявителя к Full Member Association</li>
-          <li class="reveal d2"><span class="mark">02</span>Создать независимый национальный CB по системе IPMA 4-L-C</li>
-          <li class="reveal d3"><span class="mark">03</span>Рост членской базы: индивидуальное, студенческое, корпоративное</li>
-          <li class="reveal d3"><span class="mark">04</span>Продвигать ICB4 / OCB / PEB в госсекторе и бизнесе</li>
-          <li class="reveal d4"><span class="mark">05</span>Партнёрства с вузами, госорганами, MA региона и Young Crew</li>
-        </ul>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">07 / 12</div></div>
-    </section>
-
-    <!-- 08 Certification -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">08</span><span class="sep">»</span> Сертификация</div>
-      <h2 class="reveal d1">Уровни IPMA</h2>
-      <p class="lead reveal d2">Независимый CB · оценка по ICB4 · самооценка, экзамен, интервью</p>
-      <div class="body levels">
-        <div class="level reveal d1"><div class="lv">A</div><div class="nm">Projects Director</div><div class="en">Портфели и программы</div></div>
-        <div class="level reveal d2"><div class="lv">B</div><div class="nm">Senior Project Manager</div><div class="en">Сложные проекты</div></div>
-        <div class="level reveal d3"><div class="lv">C</div><div class="nm">Project Manager</div><div class="en">Средняя сложность</div></div>
-        <div class="level reveal d4"><div class="lv">D</div><div class="nm">PM Associate</div><div class="en">Базовый уровень</div></div>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> ipma.kg/ru/certification</div><div class="pg">08 / 12</div></div>
-    </section>
-
-    <!-- 09 Membership -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">09</span><span class="sep">»</span> Членство</div>
-      <h2 class="reveal d1">Рост сообщества</h2>
-      <div class="body">
-        <div class="mem-rows">
-          <div class="mem-row reveal d1"><div class="y">2027</div><p>15–20 индивидуальных членов, студенческий трек</p></div>
-          <div class="mem-row reveal d2"><div class="y">2028</div><p>50+ членов, первые корпоративные партнёры</p></div>
-          <div class="mem-row reveal d3"><div class="y">2029</div><p>100+ членов, устойчивый рост сертификации</p></div>
+        <div class="econ reveal d2">
+          <div class="econ-item"><div class="v">≈11%</div><div class="l">Рост реального ВВП в 2025 (оценки МВФ / Всемирного банка)</div></div>
+          <div class="econ-item"><div class="v">≈$23 млрд</div><div class="l">Номинальный ВВП · рост ВВП на душу населения в последние годы</div></div>
+          <div class="econ-item"><div class="v">Топ‑рост</div><div class="l">Среди лидеров по темпам роста в 2021–2025 (оценка МВФ)</div></div>
         </div>
-        <div class="tags reveal d4">
-          <span class="tag">Индивидуальное</span><span class="tag">Студенческое</span><span class="tag">Корпоративное</span>
+        <div class="econ reveal d3" style="margin-top:18px">
+          <div class="econ-item"><div class="v">Строительство</div><div class="l">Один из драйверов роста · инфраструктура и инвестиции</div></div>
+          <div class="econ-item"><div class="v">Цифра</div><div class="l">Налоги, таможня, госуслуги · цифровая инфраструктура и AI-повестка</div></div>
+          <div class="econ-item"><div class="v">ГЭС / коридоры</div><div class="l">Крупные инфраструктурные инициативы и региональная связанность</div></div>
         </div>
+        <p class="note reveal d4">Источники: IMF Article IV (2026), World Bank Kyrgyz Republic overview — округлённые ориентиры для CoD.</p>
       </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> ipma.kg/ru/membership</div><div class="pg">09 / 12</div></div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">04 / 10</div></div>
     </section>
 
-    <!-- 10 Ecosystem -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">10</span><span class="sep">»</span> Экосистема</div>
-      <h2 class="reveal d1">С кем строим</h2>
-      <div class="body pillars">
-        <div class="pillar reveal d1"><h3>Госсектор</h3><p>Министерства и ведомства — цифровые и инфраструктурные проекты</p></div>
-        <div class="pillar reveal d2"><h3>Бизнес</h3><p>Компании и подрядчики с проектными и программными инициативами</p></div>
-        <div class="pillar reveal d3"><h3>Образование</h3><p>Университеты Бишкека как источник молодых кадров</p></div>
-        <div class="pillar reveal d4"><h3>Обучение</h3><p>Провайдеры подготовки к ICB4 · сайт ipma.kg на русском и кыргызском</p></div>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">10 / 12</div></div>
-    </section>
-
-    <!-- 11 Young Crew -->
-    <section class="slide light">
-      <div class="mesh"></div>
-      <div class="eyebrow reveal"><span class="idx">11</span><span class="sep">»</span> Молодёжь</div>
-      <h2 class="reveal d1">Young Crew</h2>
-      <div class="body">
-        <ul class="rule-list">
-          <li class="reveal d1"><span class="mark">»</span>Знакомить молодёжь со стандартами и ценностями IPMA</li>
-          <li class="reveal d2"><span class="mark">»</span>Привлекать студентов через студенческое членство KgPMU</li>
-          <li class="reveal d3"><span class="mark">»</span>Интегрировать ICB4 в образовательные программы вузов</li>
-          <li class="reveal d3"><span class="mark">»</span>Путь к сертификации IPMA Level D</li>
-          <li class="reveal d4"><span class="mark">»</span>Участие в международных форумах Young Crew</li>
-        </ul>
-        <div class="stripe reveal d4">Поддержка будущего профессии P3M в Кыргызстане</div>
-      </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">11 / 12</div></div>
-    </section>
-
-    <!-- 12 Thanks -->
+    <!-- 5 Mission -->
     <section class="slide dark">
+      <div class="mesh"></div><div class="chevron-orb">»</div>
+      <div class="eyebrow reveal"><span class="idx">05</span><span class="sep">»</span> Миссия</div>
+      <h2 class="reveal d1">Миссия KgPMU</h2>
+      <div class="body">
+        <p class="mission-type reveal d1">Создать в Кыргызстане сообщество лидеров, способных реализовывать проекты мирового уровня — на стандартах IPMA и национальных ценностях.</p>
+        <p class="mission-side reveal d2">Повышаем зрелость управления проектами через образование, сертификацию и обмен практиками по ICB4. Формируем национальное сообщество и независимый орган сертификации 4‑L‑C. Интегрируем Кыргызстан в глобальную семью IPMA.</p>
+      </div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> По уставу / ipma.kg</div><div class="pg">05 / 10</div></div>
+    </section>
+
+    <!-- 6 Demand + goals -->
+    <section class="slide light">
       <div class="mesh"></div>
-      <div class="chevron-orb" aria-hidden="true">»</div>
+      <div class="eyebrow reveal"><span class="idx">06</span><span class="sep">»</span> Стратегия</div>
+      <h2 class="reveal d1">Спрос и цели</h2>
+      <div class="body two-col">
+        <div class="reveal d2">
+          <div class="role">Спрос на P3M</div>
+          <div class="sector-grid tags" style="margin-top:0;margin-bottom:8px">
+            <span class="tag">Госуправление</span><span class="tag">Строительство</span><span class="tag">IT</span>
+            <span class="tag">Медицина и НПО</span><span class="tag">Инфраструктура</span><span class="tag">Цифровизация</span>
+          </div>
+          <p class="lead" style="max-width:none;margin-top:10px">Масштабные госпрограммы и donor/corporate проекты требуют сертифицированных компетенций и общей «языка» IPMA.</p>
+        </div>
+        <div class="reveal d3">
+          <div class="role">Стратегические цели</div>
+          <ul class="rule-list">
+            <li><span class="mark">01</span>Перейти от Ассоциации-заявителя к Full Member Association</li>
+            <li><span class="mark">02</span>Создать независимый CB по системе IPMA 4‑L‑C</li>
+            <li><span class="mark">03</span>Рост членства: индивидуальное, студенческое, корпоративное</li>
+            <li><span class="mark">04</span>Продвигать ICB4 / OCB / PEB в госсекторе и бизнесе</li>
+            <li><span class="mark">05</span>Партнёрства с вузами, госорганами и бизнесом</li>
+            <li><span class="mark">06</span>Сотрудничество с MA ЦА и ЕАЭС · запуск Young Crew</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">06 / 10</div></div>
+    </section>
+
+    <!-- 7 Ecosystem -->
+    <section class="slide light">
+      <div class="mesh"></div>
+      <div class="eyebrow reveal"><span class="idx">07</span><span class="sep">»</span> Экосистема</div>
+      <h2 class="reveal d1">Экосистема и продвижение</h2>
+      <div class="body pillars">
+        <div class="pillar reveal d1"><h3>Госсектор</h3><p>Цифровые и инфраструктурные проекты министерств и ведомств</p></div>
+        <div class="pillar reveal d2"><h3>Бизнес</h3><p>Компании и подрядчики, реализующие проекты и программы</p></div>
+        <div class="pillar reveal d3"><h3>Образование</h3><p>Университеты Бишкека — источник молодых кадров и Young Crew</p></div>
+        <div class="pillar reveal d4"><h3>Обучение</h3><p>Подготовка к сертификации ICB4 и развитие провайдеров</p></div>
+      </div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">07 / 10</div></div>
+    </section>
+
+    <!-- 8 Done -->
+    <section class="slide light">
+      <div class="mesh"></div>
+      <div class="eyebrow reveal"><span class="idx">08</span><span class="sep">»</span> Результаты</div>
+      <h2 class="reveal d1">Что уже сделано</h2>
+      <div class="body t-wrap timeline">
+        <div class="t-item reveal d1"><div class="dot"></div><div><strong>Регистрация ОО «KgPMU»</strong><p>Официальная регистрация в Министерстве юстиции Кыргызской Республики</p></div></div>
+        <div class="t-item reveal d2"><div class="dot"></div><div><strong>Пакет документов в IPMA</strong><p>Заявка направлена в штаб-квартиру IPMA · статус Ассоциации-заявителя</p></div></div>
+        <div class="t-item reveal d3"><div class="dot"></div><div><strong>Сертификация руководителя</strong><p>Урмат Мекишев прошёл обучение и получил сертификат IPMA Level B</p></div></div>
+        <div class="t-item reveal d4"><div class="dot"></div><div><strong>Совместное обучение с AzPMA</strong><p>Гибридная программа: 4 студента успешно сертифицированы — <strong>3 × Level C</strong> и <strong>1 × Level B</strong></p></div></div>
+      </div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> KgPMU × AzPMA</div><div class="pg">08 / 10</div></div>
+    </section>
+
+    <!-- 9 Ask -->
+    <section class="slide dark">
+      <div class="mesh"></div><div class="chevron-orb">»</div>
+      <div class="eyebrow reveal"><span class="idx">09</span><span class="sep">»</span> Council of Delegates</div>
+      <h2 class="reveal d1">Благодарим делегатов</h2>
+      <div class="body">
+        <p class="mission-type reveal d1" style="max-width:24ch;font-size:clamp(22px,3vw,34px)">Спасибо Совету делегатов IPMA за внимание к голосу Центральной Азии.</p>
+        <div class="ask-box reveal d2">
+          <p>Просим поддержать KgPMU и своим голосом помочь включить Кыргызское объединение управления проектами в большую семью IPMA — как полноправного национального партнёра.</p>
+        </div>
+        <p class="lead reveal d3" style="margin-top:18px;color:#a9c0d0">Мы готовы сотрудничать, учиться у зрелых MA и делиться опытом emerging-рынка.</p>
+      </div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> Support KgPMU</div><div class="pg">09 / 10</div></div>
+    </section>
+
+    <!-- 10 Thanks -->
+    <section class="slide dark">
+      <div class="mesh"></div><div class="chevron-orb">»</div>
       <div class="title-grid">
         <div>
-          <div class="kick reveal">Спасибо</div>
-          <h1 class="display reveal d1" style="font-size:clamp(32px,5vw,56px)">Приглашаем<br>к сотрудничеству</h1>
-          <p class="subline reveal d2">Уже Ассоциация-заявитель. Следующий шаг — Full MA, сертификация и голос Центральной Азии в семье IPMA.</p>
+          <div class="kick reveal">Спасибо за внимание</div>
+          <h1 class="display reveal d1" style="font-size:clamp(32px,5vw,52px)">Ждём сотрудничества</h1>
+          <p class="subline reveal d2">KgPMU · IPMA Kyrgyz Republic · Бишкек</p>
           <div class="contacts reveal d3">
             <a href="mailto:info@ipma.kg">info@ipma.kg</a>
             <span>+996 555 655 755</span>
             <a href="https://ipma.kg">ipma.kg</a>
           </div>
-          <p class="who reveal d4">Урмат Мекишев · Президент · Бишкек</p>
+          <p class="who reveal d4">Урмат Мекишев · Президент KgPMU</p>
         </div>
-        <div class="logo-plane reveal d2">
-          <img src="assets/ipma-kr-logo-white.png" alt="IPMA Kyrgyz Republic">
-        </div>
+        <div class="logo-plane reveal d2"><img src="assets/ipma-kr-logo-white.png" alt="IPMA Kyrgyz Republic"></div>
       </div>
-      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">12 / 12</div></div>
+      <div class="foot"><div class="brand-mark"><img src="assets/ipma-kr-emblem.png" alt=""> IPMA Kyrgyz Republic</div><div class="pg">10 / 10</div></div>
     </section>
   </div>
 
   <div class="rail">
-    <div class="counter"><span id="cur">1</span> / 12</div>
+    <div class="counter"><span id="cur">1</span> / 10</div>
     <div class="track"><div class="fill" id="fill"></div></div>
-    <button class="tool" id="fsBtn" type="button" title="Fullscreen">⛶</button>
+    <button class="tool" id="fsBtn" type="button">⛶</button>
     <div class="hint"><kbd>←</kbd> <kbd>→</kbd> · <kbd>F</kbd></div>
   </div>
 </div>
@@ -528,32 +364,14 @@ h2{
 (function(){
   var slides=[].slice.call(document.querySelectorAll('.slide')), idx=0;
   var cur=document.getElementById('cur'), fill=document.getElementById('fill');
-  function render(){
-    slides.forEach(function(s,i){s.classList.toggle('active',i===idx)});
-    cur.textContent=idx+1;
-    fill.style.width=((idx+1)/slides.length*100)+'%';
-  }
+  function render(){slides.forEach(function(s,i){s.classList.toggle('active',i===idx)});cur.textContent=idx+1;fill.style.width=((idx+1)/slides.length*100)+'%'}
   function go(d){idx=Math.max(0,Math.min(slides.length-1,idx+d));render()}
   document.getElementById('prevBtn').onclick=function(){go(-1)};
   document.getElementById('nextBtn').onclick=function(){go(1)};
-  document.getElementById('fsBtn').onclick=function(){
-    var el=document.documentElement;
-    if(!document.fullscreenElement) el.requestFullscreen&&el.requestFullscreen();
-    else document.exitFullscreen&&document.exitFullscreen();
-  };
-  document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1)}
-    if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}
-    if(e.key.toLowerCase()==='f') document.getElementById('fsBtn').click();
-    if(e.key==='Home'){idx=0;render()}
-    if(e.key==='End'){idx=slides.length-1;render()}
-  });
-  var tx=null;
-  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
-  document.addEventListener('touchend',function(e){
-    if(tx==null)return;var dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>60)go(dx<0?1:-1);tx=null;
-  },{passive:true});
+  document.getElementById('fsBtn').onclick=function(){var el=document.documentElement;if(!document.fullscreenElement)el.requestFullscreen&&el.requestFullscreen();else document.exitFullscreen&&document.exitFullscreen()};
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}if(e.key.toLowerCase()==='f')document.getElementById('fsBtn').click();if(e.key==='Home'){idx=0;render()}if(e.key==='End'){idx=slides.length-1;render()}});
+  var tx=null;document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){if(tx==null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60)go(dx<0?1:-1);tx=null},{passive:true});
   render();
 })();
 </script>
